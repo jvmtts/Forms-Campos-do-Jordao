@@ -18,14 +18,8 @@ npm run build
 
 ## Integração com o Basin
 
-O formulário já está preparado para enviar os dados e os documentos diretamente ao Basin. A geração do contrato não faz parte desta etapa.
+O formulário envia os dados e os documentos ao Basin no endpoint `https://usebasin.com/f/4c202af3081c`. A geração do contrato não faz parte desta etapa.
 
-Para testar localmente, copie `.env.example` para `.env` e substitua o valor pelo endpoint criado no painel do Basin:
+O endpoint está definido diretamente em `src/components/ExpeditionForm.tsx`; não é necessário configurar variável de ambiente local ou na Vercel. A variável antiga `VITE_BASIN_ENDPOINT`, se ainda existir no painel, não é utilizada pelo formulário. Para mudar o destino futuramente, altere o endereço no código e publique novamente o projeto.
 
-```env
-VITE_BASIN_ENDPOINT=https://usebasin.com/f/SEU_FORM_ID
-```
-
-Na hospedagem, cadastre a mesma variável de ambiente e publique novamente o projeto. Como as variáveis do Vite são aplicadas durante a compilação, uma nova publicação é necessária sempre que o endpoint for alterado.
-
-O envio usa `multipart/form-data`, mantém os documentos em seus formatos originais e apresenta os campos no painel do Basin com nomes legíveis. Sem um endpoint válido configurado, nenhum dado é enviado.
+O envio usa `multipart/form-data`, mantém os documentos em seus formatos originais e apresenta os campos no painel do Basin com nomes legíveis, incluindo o protocolo da inscrição. Um endpoint inválido impede o envio.
